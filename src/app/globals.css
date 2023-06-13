@@ -6,4 +6,8 @@
   :root {
     color-scheme: dark;
   }
+
+  .nav-item svg {
+    @apply h-8 w-8 md:h-6 md:w-6;
+  }
 }

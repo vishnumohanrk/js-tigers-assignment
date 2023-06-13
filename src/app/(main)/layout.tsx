@@ -1,0 +1,13 @@
+import { NavBar } from '@/components/nav-bar';
+import type { RCProps } from '@/types';
+
+export default function MainLayout({ children }: RCProps) {
+  return (
+    <>
+      <NavBar />
+      <main className="mx-auto max-w-screen-lg p-4 pb-20 md:pl-[17rem]">
+        {children}
+      </main>
+    </>
+  );
+}
