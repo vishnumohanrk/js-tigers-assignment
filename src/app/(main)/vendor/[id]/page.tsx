@@ -5,23 +5,29 @@ import { Button } from '@/components/button';
 import { ButtonGroup } from '@/components/button-group';
 import { DeleteVendor } from '@/components/delete-vendor';
 import { VendorInfo } from '@/components/vendor-info';
+import { formKeys } from '@/lib/constants';
+import type { VendorPageProps } from '@/types';
 
-export default function VendorPage() {
+import { getVendorById } from './api';
+
+export default async function VendorPage({ params: { id } }: VendorPageProps) {
+  const vendor = await getVendorById(id);
+
   return (
     <section>
       <h1 className="mb-4 text-2xl font-bold">Vendor Details</h1>
       <dl className="overflow-hidden rounded-md border">
-        {Object.entries(vendor).map(([i, j]) => (
-          <VendorInfo key={i} label={i} value={j} />
+        {formKeys.map((i) => (
+          <VendorInfo key={i} label={i} value={vendor[i]} />
         ))}
       </dl>
       <ButtonGroup className="mt-8">
         <Button variant="secondary" asChild>
-          <Link href="/vendor/99/edit">
+          <Link href={`/vendor/${id}/edit`}>
             <MdModeEdit size={20} /> Edit Vendor
           </Link>
         </Button>
-        <DeleteVendor>
+        <DeleteVendor id={id}>
           <Button variant="danger">
             <MdDelete size={20} /> Delete Vendor
           </Button>
@@ -30,14 +36,3 @@ export default function VendorPage() {
     </section>
   );
 }
-
-const vendor = {
-  vendorName: 'Lorem Ipsum',
-  bankName: 'Lorem Bank',
-  bankAccountNumber: '9090909090',
-  addressLine1: 'Flat 1010, 10th Tower, Lorem Apartments',
-  addressLine2: 'Lorem Street, Lorem Nagar',
-  city: 'Chennai',
-  zipCode: '909090',
-  country: 'India',
-};

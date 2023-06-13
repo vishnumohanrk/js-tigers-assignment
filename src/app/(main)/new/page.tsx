@@ -1,31 +1,29 @@
-'use client';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
-import { Form, FormSubmit } from '@radix-ui/react-form';
+import { VendorForm } from '@/components/form';
+import { db } from '@/lib/db';
+import { getAuthUserId } from '@/lib/session';
+import { validateForm } from '@/lib/utils';
 
-import { FormButton } from '@/components/form-button';
-import { FormInput } from '@/components/form-input';
+async function createVendor(formData: FormData) {
+  'use server';
+  const data = validateForm(formData);
+  const userId = await getAuthUserId();
+  const vendor = await db.vendor.create({
+    data: { ...data, userId },
+    select: { id: true },
+  });
+
+  revalidatePath('/');
+  redirect(`/vendor/${vendor.id}`);
+}
 
 export default function NewVendorPage() {
   return (
     <section>
-      <h1 className="sr-only">Vendor Details</h1>
-      <Form className="space-y-5">
-        <FormInput name="vendorName" />
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <FormInput name="bankName" />
-          <FormInput name="bankAccountNumber" type="number" />
-          <FormInput name="addressLine1" multiLine />
-          <FormInput name="addressLine2" multiLine required={false} />
-          <FormInput name="city" />
-          <FormInput name="zipCode" type="number" />
-        </div>
-        <FormInput name="country" />
-        <div className="flex justify-end">
-          <FormSubmit asChild>
-            <FormButton variant="primary">Create Vendor</FormButton>
-          </FormSubmit>
-        </div>
-      </Form>
+      <h2 className="sr-only">Vendor Details</h2>
+      <VendorForm type="create" action={createVendor} />
     </section>
   );
 }

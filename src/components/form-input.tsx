@@ -12,7 +12,7 @@ type FormInputProps = {
   name: string;
   required?: boolean;
   multiLine?: boolean;
-  defaultValue?: string;
+  defaultValue?: string | null;
   type?: React.ComponentProps<'input'>['type'];
 };
 
@@ -36,7 +36,7 @@ export function FormInput({
       <FormControl
         asChild
         required={required}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue ?? ''}
         className={cn(
           'w-full rounded-md border bg-transparent px-3 focus:outline-none focus:ring-2 focus:ring-neutral-700 focus:ring-offset-2 focus:ring-offset-neutral-950 disabled:cursor-not-allowed disabled:opacity-60 data-[invalid]:border-red-500',
           multiLine ? 'h-32 resize-none py-2' : 'h-12'

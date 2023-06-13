@@ -1,34 +1,42 @@
+import type { Vendor } from '@prisma/client';
 import Link from 'next/link';
 import { MdAccountBalance, MdTag } from 'react-icons/md';
 
+import type { VENDOR_LIST_SELECT } from '@/lib/constants';
+
 import { DeleteVendor } from './delete-vendor';
 
-export function VendorCard() {
+export function VendorCard({
+  id,
+  bankName,
+  vendorName,
+  bankAccountNumber,
+}: Pick<Vendor, keyof typeof VENDOR_LIST_SELECT>) {
   return (
     <li className="rounded-md border-x">
-      <Link href="/vendor/99">
+      <Link href={`/vendor/${id}`}>
         <h2 className="rounded-t-md border-y bg-neutral-900 px-4 py-3 text-xl font-bold">
-          lorem2
+          {vendorName}
         </h2>
         <div className="p-4 text-neutral-400">
           <p className="flex items-center gap-2">
             <MdAccountBalance />
-            Lorem Bank
+            {bankName}
           </p>
           <p className="flex items-center gap-2">
             <MdTag />
-            90909090
+            {bankAccountNumber}
           </p>
         </div>
       </Link>
       <div className="flex">
         <Link
-          href="/vendor/99/edit"
+          href={`/vendor/${id}/edit`}
           className={`${CARD_ACTION_CLASS} rounded-bl-md border-r text-center`}
         >
           Edit
         </Link>
-        <DeleteVendor>
+        <DeleteVendor id={id}>
           <button
             type="button"
             className={`${CARD_ACTION_CLASS} rounded-br-md text-red-400`}
