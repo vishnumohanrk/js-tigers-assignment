@@ -1,12 +1,12 @@
 import { Label } from './label';
 
 type VendorInfoProps = {
-  value: string;
   label: string;
+  value: string | number | null;
 };
 
 export function VendorInfo({ label, value }: VendorInfoProps) {
-  return (
+  return value ? (
     <div className="border-b last:border-b-0 max-lg:p-4 lg:flex">
       <dt className="text-neutral-400 max-lg:mb-0.5 max-lg:text-sm lg:w-60 lg:border-r lg:bg-neutral-900 lg:p-4">
         <Label text={label} />
@@ -15,5 +15,5 @@ export function VendorInfo({ label, value }: VendorInfoProps) {
         {value}
       </dd>
     </div>
-  );
+  ) : null;
 }

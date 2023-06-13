@@ -3,10 +3,12 @@ import {
   MdAddCircle,
   MdAddCircleOutline,
   MdDashboard,
+  MdLogout,
   MdOutlineDashboard,
 } from 'react-icons/md';
 
 import { NavItem } from './nav-item';
+import { NavProfile } from './nav-profile';
 
 export function NavBar() {
   return (
@@ -32,7 +34,9 @@ export function NavBar() {
           icon={<MdAddCircleOutline />}
           activeIcon={<MdAddCircle />}
         />
-        {/* <NavItem href="/" label="My List" icon={<Home />} /> */}
+        <NavProfile>
+          <MdLogout /> Sign Out
+        </NavProfile>
       </ul>
     </nav>
   );
