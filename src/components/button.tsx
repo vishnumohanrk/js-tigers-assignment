@@ -1,15 +1,19 @@
+import { Slot } from '@radix-ui/react-slot';
 import { forwardRef } from 'react';
 
 import { cn } from './utils';
 
 export type ButtonProps = {
+  asChild?: boolean;
   variant: 'primary' | 'secondary' | 'danger';
 } & React.ComponentPropsWithRef<'button'>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, className, type, ...rest }, ref) => {
+  ({ variant, className, type, asChild = false, ...rest }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+
     return (
-      <button
+      <Comp
         {...rest}
         ref={ref}
         type={type || 'button'}
