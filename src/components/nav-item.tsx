@@ -17,14 +17,16 @@ export function NavItem({ activeIcon, icon, href, label }: Props) {
   const isActive = pathName === href;
 
   return (
-    <li className="w-full">
-      <Link
-        href={href}
-        className={cn(NAV_ITEM_CLASS, isActive && 'text-neutral-50')}
-      >
-        {isActive ? activeIcon : icon}
-        {label}
-      </Link>
-    </li>
+    <Link
+      href={href}
+      className={cn(
+        NAV_ITEM_CLASS,
+        'font-semibold text-neutral-400 hover:underline',
+        isActive && 'text-neutral-50'
+      )}
+    >
+      <span className="md:hidden">{isActive ? activeIcon : icon}</span>
+      <span className="max-md:sr-only">{label}</span>
+    </Link>
   );
 }
