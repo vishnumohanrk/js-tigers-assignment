@@ -9,25 +9,26 @@ import { db } from '@/lib/db';
 import { getAuthUserId } from '@/lib/session';
 
 async function getVendorList(page?: string) {
-  const userId = await getAuthUserId();
-  const count = await db.vendor.count({ where: { userId } });
-
   const take = 10;
   let currentPage = Number(page) || 1;
 
-  if (currentPage * take > count || currentPage < 0) {
+  if (currentPage < 0) {
     currentPage = 1;
   }
 
   const skip = (currentPage - 1) * take;
 
-  const vendors = await db.vendor.findMany({
-    where: { userId },
-    select: VENDOR_LIST_SELECT,
-    take,
-    skip,
-    orderBy: { id: 'desc' },
-  });
+  const userId = await getAuthUserId();
+  const [vendors, count] = await Promise.all([
+    db.vendor.findMany({
+      where: { userId },
+      select: VENDOR_LIST_SELECT,
+      take,
+      skip,
+      orderBy: { createdAt: 'desc' },
+    }),
+    db.vendor.count({ where: { userId } }),
+  ]);
 
   const next = currentPage * take < count ? currentPage + 1 : null;
   const previous = currentPage > 1 ? currentPage - 1 : null;
@@ -45,21 +46,26 @@ export default async function AppHome({
   return (
     <Section heading="My List" className="flex min-h-[--ht] flex-col">
       {vendors.length === 0 ? (
-        <PageCenter text="You haven't created any vendors yet">
-          <Link href="/new" className="font-medium underline">
-            Create Now
+        <PageCenter
+          text={previous ? '' : `You haven't created any vendors yet`}
+        >
+          <Link
+            href={previous ? '/' : '/new'}
+            className="font-medium underline"
+          >
+            {previous ? 'Home' : 'Create Now'}
           </Link>
         </PageCenter>
       ) : (
-        <ul className="grid grow grid-cols-1 gap-5 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {vendors.map((i) => (
             <VendorCard key={i.id} {...i} />
           ))}
         </ul>
       )}
-      <div className="mt-6 flex justify-between gap-5">
-        <PaginateLink text="Older" token={previous} />
-        <PaginateLink text="Newer" token={next} className="ml-auto" />
+      <div className="mt-6 flex grow items-end justify-between gap-5">
+        <PaginateLink text="Newer" token={previous} />
+        <PaginateLink text="Older" token={next} className="ml-auto" />
       </div>
     </Section>
   );
