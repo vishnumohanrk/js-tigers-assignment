@@ -17,7 +17,7 @@ export function PageCenter({
   return (
     <div
       className={cn(
-        'flex min-h-[calc(100svh-10rem)] flex-col items-center justify-center gap-3 p-4',
+        'flex min-h-[--ht] flex-col items-center justify-center gap-3 p-4',
         className
       )}
     >
