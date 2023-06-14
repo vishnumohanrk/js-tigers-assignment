@@ -9,15 +9,20 @@ import { validateForm } from '@/lib/utils';
 
 async function createVendor(formData: FormData) {
   'use server';
-  const data = validateForm(formData);
-  const userId = await getAuthUserId();
-  const vendor = await db.vendor.create({
-    data: { ...data, userId },
-    select: { id: true },
-  });
+  const validation = validateForm(formData);
 
-  revalidatePath('/');
-  redirect(`/vendor/${vendor.id}`);
+  if (validation.success) {
+    const userId = await getAuthUserId();
+    const vendor = await db.vendor.create({
+      data: { ...validation.data, userId },
+      select: { id: true },
+    });
+
+    revalidatePath('/');
+    redirect(`/vendor/${vendor.id}`);
+  }
+
+  return validation.error.flatten().fieldErrors;
 }
 
 export default function NewVendorPage() {

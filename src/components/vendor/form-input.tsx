@@ -8,14 +8,15 @@ import {
 import { cn } from '../utils';
 import { Label } from './label';
 
+type InpProps = React.ComponentProps<'input'>;
+
 type FormInputProps = {
   name: string;
   grow?: boolean;
-  required?: boolean;
   multiLine?: boolean;
-  defaultValue?: string | null;
-  type?: React.ComponentProps<'input'>['type'];
-};
+  serverInvalid?: boolean;
+  defaultValue: InpProps['defaultValue'] | null;
+} & Pick<InpProps, 'required' | 'type'>;
 
 export function FormInput({
   name,
@@ -24,15 +25,27 @@ export function FormInput({
   type = 'text',
   required = true,
   multiLine = false,
+  serverInvalid = false,
 }: FormInputProps) {
   return (
-    <FormField name={name} className={grow ? 'md:col-span-2' : ''}>
+    <FormField
+      name={name}
+      serverInvalid={serverInvalid}
+      className={grow ? 'md:col-span-2' : ''}
+    >
       <div className="mb-2 flex justify-between font-medium">
         <FormLabel>
           <Label text={name} />
         </FormLabel>
         <FormMessage match="valueMissing" className="text-red-400">
           Required
+        </FormMessage>
+        <FormMessage
+          match="typeMismatch"
+          className="text-red-400"
+          forceMatch={serverInvalid}
+        >
+          Please enter valid value
         </FormMessage>
       </div>
       <FormControl

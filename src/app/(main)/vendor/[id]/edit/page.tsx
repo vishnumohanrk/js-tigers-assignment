@@ -14,15 +14,20 @@ export default async function EditVendorPage({ params }: VendorPageProps) {
 
   async function updateVendor(formData: FormData) {
     'use server';
-    const data = validateForm(formData);
-    await validateOwner(params.id);
-    await db.vendor.update({
-      where: { id: params.id },
-      data,
-    });
+    const validation = validateForm(formData);
 
-    revalidatePath('/');
-    redirect(`/vendor/${params.id}`);
+    if (validation.success) {
+      await validateOwner(params.id);
+      await db.vendor.update({
+        where: { id: params.id },
+        data: validation.data,
+      });
+
+      revalidatePath('/');
+      redirect(`/vendor/${params.id}`);
+    }
+
+    return validation.error.flatten().fieldErrors;
   }
 
   return (

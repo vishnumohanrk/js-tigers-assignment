@@ -5,19 +5,21 @@ import { z } from 'zod';
 import { db } from './db';
 import { getAuthUserId } from './session';
 
+const reqVal = z.string().nonempty();
+
 const formSchema = z.object({
-  vendorName: z.string(),
-  bankName: z.string(),
-  bankAccountNumber: z.string(),
-  addressLine1: z.string(),
+  vendorName: reqVal,
+  bankName: reqVal,
+  bankAccountNumber: reqVal,
+  addressLine1: reqVal,
   addressLine2: z.string().nullable(),
-  city: z.string(),
-  zipCode: z.string(),
-  country: z.string(),
+  city: reqVal,
+  zipCode: reqVal,
+  country: reqVal,
 });
 
 export function validateForm(formData: FormData) {
-  return formSchema.parse(Object.fromEntries(formData));
+  return formSchema.safeParse(Object.fromEntries(formData));
 }
 
 export async function validateOwner(id: string) {
