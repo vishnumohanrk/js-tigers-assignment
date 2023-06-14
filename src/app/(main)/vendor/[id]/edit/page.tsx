@@ -1,6 +1,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { Section } from '@/components/shared/section';
 import { VendorForm } from '@/components/vendor/form';
 import { db } from '@/lib/db';
 import { validateForm, validateOwner } from '@/lib/utils';
@@ -25,9 +26,8 @@ export default async function EditVendorPage({ params }: VendorPageProps) {
   }
 
   return (
-    <section>
-      <h2 className="sr-only">Edit Vendor Details</h2>
+    <Section heading="Edit Vendor Details">
       <VendorForm type="update" action={updateVendor} vendor={vendor} />
-    </section>
+    </Section>
   );
 }

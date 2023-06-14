@@ -21,7 +21,7 @@ export function NavBar() {
         <nav className="flex grow justify-end">
           <NavItem
             href="/"
-            label="My List"
+            label="My Vendors"
             icon={<MdOutlineHome />}
             activeIcon={<MdHome />}
           />
