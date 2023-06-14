@@ -5,11 +5,12 @@ import {
   FormMessage,
 } from '@radix-ui/react-form';
 
+import { cn } from '../utils';
 import { Label } from './label';
-import { cn } from './utils';
 
 type FormInputProps = {
   name: string;
+  grow?: boolean;
   required?: boolean;
   multiLine?: boolean;
   defaultValue?: string | null;
@@ -18,15 +19,16 @@ type FormInputProps = {
 
 export function FormInput({
   name,
-  type = 'text',
   defaultValue,
+  grow = false,
+  type = 'text',
   required = true,
   multiLine = false,
 }: FormInputProps) {
   return (
-    <FormField name={name}>
+    <FormField name={name} className={grow ? 'md:col-span-2' : ''}>
       <div className="mb-2 flex justify-between font-medium">
-        <FormLabel className="capitalize">
+        <FormLabel>
           <Label text={name} />
         </FormLabel>
         <FormMessage match="valueMissing" className="text-red-400">

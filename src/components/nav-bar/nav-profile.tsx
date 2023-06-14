@@ -1,9 +1,10 @@
 import { getCurrentUser } from '@/lib/session';
 
-import { Avatar } from './avatar';
-import { Popover } from './popover';
-import { SignOutButton } from './sign-out-button';
-import { cn, NAV_ITEM_CLASS } from './utils';
+import { Avatar } from '../shared/avatar';
+import { ButtonGroup } from '../shared/button-group';
+import { Popover } from '../shared/popover';
+import { SignOutButton } from '../shared/sign-out-button';
+import { cn, NAV_ITEM_CLASS } from '../utils';
 
 export async function NavProfile() {
   const user = await getCurrentUser();
@@ -26,9 +27,9 @@ export async function NavProfile() {
           <p className="truncate text-sm text-neutral-400">{user.email}</p>
         </div>
       </div>
-      <div className="mt-4 flex justify-end text-sm">
+      <ButtonGroup wrap={false} className="mt-6">
         <SignOutButton />
-      </div>
+      </ButtonGroup>
     </Popover>
   );
 }

@@ -4,7 +4,7 @@ import { MdAccountBalance, MdTag } from 'react-icons/md';
 
 import type { VENDOR_LIST_SELECT } from '@/lib/constants';
 
-import { DeleteVendor } from './delete-vendor';
+import { DeleteVendor } from './delete';
 
 export function VendorCard({
   id,
@@ -19,12 +19,12 @@ export function VendorCard({
           {vendorName}
         </h2>
         <div className="p-4 text-neutral-400">
-          <p className="flex items-center gap-2">
-            <MdAccountBalance />
+          <p>
+            <MdAccountBalance className="mr-2 inline" />
             {bankName}
           </p>
-          <p className="flex items-center gap-2">
-            <MdTag />
+          <p>
+            <MdTag className="mr-2 inline" />
             {bankAccountNumber}
           </p>
         </div>

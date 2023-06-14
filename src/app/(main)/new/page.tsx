@@ -1,7 +1,8 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { VendorForm } from '@/components/form';
+import { Section } from '@/components/shared/section';
+import { VendorForm } from '@/components/vendor/form';
 import { db } from '@/lib/db';
 import { getAuthUserId } from '@/lib/session';
 import { validateForm } from '@/lib/utils';
@@ -21,9 +22,8 @@ async function createVendor(formData: FormData) {
 
 export default function NewVendorPage() {
   return (
-    <section>
-      <h2 className="sr-only">Vendor Details</h2>
+    <Section heading="Create New Vendor">
       <VendorForm type="create" action={createVendor} />
-    </section>
+    </Section>
   );
 }

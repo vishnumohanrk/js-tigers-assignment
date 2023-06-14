@@ -10,7 +10,7 @@ export function SignOutButton() {
   }
 
   return (
-    <Button variant="secondary" onClick={handleClick}>
+    <Button variant="secondary" onClick={handleClick} className="h-10">
       Sign Out
     </Button>
   );

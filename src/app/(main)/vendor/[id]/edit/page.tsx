@@ -1,7 +1,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { VendorForm } from '@/components/form';
+import { VendorForm } from '@/components/vendor/form';
 import { db } from '@/lib/db';
 import { validateForm, validateOwner } from '@/lib/utils';
 import type { VendorPageProps } from '@/types';

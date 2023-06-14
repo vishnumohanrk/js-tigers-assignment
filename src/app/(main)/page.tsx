@@ -1,4 +1,4 @@
-import { VendorCard } from '@/components/vendor-card';
+import { VendorCard } from '@/components/vendor/card';
 import { VENDOR_LIST_SELECT } from '@/lib/constants';
 import { db } from '@/lib/db';
 import { getAuthUserId } from '@/lib/session';
@@ -18,7 +18,7 @@ export default async function AppHome() {
 
   return (
     <section>
-      <h1 className="sr-only">Vendor List</h1>
+      <h2 className="sr-only">Vendor List</h2>
       <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
         {vendors.map((i) => (
           <VendorCard key={i.id} {...i} />

@@ -4,8 +4,8 @@ import { db } from '@/lib/db';
 import { validateOwner } from '@/lib/utils';
 import type { RCProps } from '@/types';
 
-import { AlertDialog } from './alert-dialog';
-import { FormButton } from './form-button';
+import { AlertDialog } from '../shared/alert-dialog';
+import { FormButton } from '../shared/form-button';
 
 type DeleteVendorProps = RCProps & {
   id: string;

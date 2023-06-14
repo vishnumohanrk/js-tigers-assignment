@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 
-import { Button } from '@/components/button';
-import { ButtonGroup } from '@/components/button-group';
-import { DeleteVendor } from '@/components/delete-vendor';
-import { VendorInfo } from '@/components/vendor-info';
+import { Button } from '@/components/shared/button';
+import { ButtonGroup } from '@/components/shared/button-group';
+import { Section } from '@/components/shared/section';
+import { DeleteVendor } from '@/components/vendor/delete';
+import { VendorInfo } from '@/components/vendor/info';
 import { formKeys } from '@/lib/constants';
 import type { VendorPageProps } from '@/types';
 
@@ -14,14 +15,13 @@ export default async function VendorPage({ params: { id } }: VendorPageProps) {
   const vendor = await getVendorById(id);
 
   return (
-    <section>
-      <h1 className="mb-4 text-2xl font-bold">Vendor Details</h1>
+    <Section heading="Vendor Details">
       <dl className="overflow-hidden rounded-md border">
         {formKeys.map((i) => (
           <VendorInfo key={i} label={i} value={vendor[i]} />
         ))}
       </dl>
-      <ButtonGroup className="mt-8">
+      <ButtonGroup className="mt-6">
         <Button variant="secondary" asChild>
           <Link href={`/vendor/${id}/edit`}>
             <MdModeEdit size={20} /> Edit Vendor
@@ -33,6 +33,6 @@ export default async function VendorPage({ params: { id } }: VendorPageProps) {
           </Button>
         </DeleteVendor>
       </ButtonGroup>
-    </section>
+    </Section>
   );
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn, NAV_ITEM_CLASS } from './utils';
+import { cn, NAV_ITEM_CLASS } from '../utils';
 
 type Props = {
   label: string;

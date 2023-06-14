@@ -10,4 +10,4 @@ export type VendorPageProps = {
   params: { id: string };
 };
 
-export type TForm = Pick<Vendor, (typeof formKeys)[number]>;
+export type TForm = Pick<Vendor, (typeof formKeys)[number] | 'id'>;
