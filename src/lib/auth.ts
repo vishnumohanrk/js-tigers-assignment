@@ -6,13 +6,17 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { db } from './db';
 
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  throw new Error('Missing Google Provider keys');
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
 
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
 
@@ -22,7 +26,7 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      console.log('jwt cb');
+      // console.log('jwt cb');
 
       if (user) {
         token.id = user.id;
@@ -32,7 +36,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ token, session }) {
-      console.log('session cb');
+      // console.log('session cb');
 
       if (token) {
         session.user.id = token.id;

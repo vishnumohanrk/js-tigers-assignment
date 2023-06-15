@@ -5,7 +5,7 @@ import { PageCenter } from '@/components/shared/page-center';
 
 export default async function SignInPage() {
   return (
-    <PageCenter className="min-h-[100svh] gap-5">
+    <PageCenter className="min-h-[100dvh] gap-5">
       <SignInButton>
         <IoLogoGoogle size={20} />
         Sign in with Google

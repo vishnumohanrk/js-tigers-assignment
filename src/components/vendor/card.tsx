@@ -13,11 +13,11 @@ export function VendorCard({
   bankAccountNumber,
 }: Pick<Vendor, keyof typeof VENDOR_LIST_SELECT>) {
   return (
-    <li className="h-max rounded-md border-x">
+    <li className="rounded-md border-x">
       <Link href={`/vendor/${id}`}>
-        <h2 className="truncate rounded-t-md border-y bg-neutral-900 px-4 py-3 text-xl font-bold">
+        <h3 className="truncate rounded-t-md border-y bg-neutral-900 px-4 py-3 text-xl font-bold">
           {vendorName}
-        </h2>
+        </h3>
         <div className="p-4 text-neutral-400">
           <p className="truncate">
             <MdAccountBalance className="mr-2 inline" />

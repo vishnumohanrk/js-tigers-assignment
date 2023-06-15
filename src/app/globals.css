@@ -5,10 +5,10 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --ht: calc(100svh - 8rem);
+    --ht: calc(100dvh - 8rem);
   }
 
   .nav-item svg {
-    @apply h-7 w-7;
+    @apply h-8 w-8;
   }
 }

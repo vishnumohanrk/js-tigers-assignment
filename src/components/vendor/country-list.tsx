@@ -8,8 +8,6 @@ async function getCountryList() {
   );
   const data: { name: string; alpha3Code: string }[] = await resp.json();
 
-  console.log(resp.headers.get('date'));
-
   return data;
 }
 

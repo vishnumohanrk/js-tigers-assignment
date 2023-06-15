@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import {
   MdAddCircle,
   MdAddCircleOutline,
@@ -31,7 +32,11 @@ export function NavBar() {
             icon={<MdAddCircleOutline />}
             activeIcon={<MdAddCircle />}
           />
-          <NavProfile />
+          <Suspense
+            fallback={<div className="h-16 w-[4.25rem] px-4 max-md:w-1/3" />}
+          >
+            <NavProfile />
+          </Suspense>
         </nav>
       </div>
     </header>

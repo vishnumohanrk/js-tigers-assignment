@@ -5,7 +5,7 @@ export default function NotFoundPage() {
     <PageCenter
       showHomeLink
       text="404 | Not Found"
-      className="min-h-[100svh]"
+      className="min-h-[100dvh]"
     />
   );
 }

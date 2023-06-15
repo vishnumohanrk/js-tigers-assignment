@@ -20,7 +20,7 @@ export function Popover({ children, trigger, contentClassName }: PopoverProps) {
           align="end"
           className={cn(
             contentClassName,
-            'animate-in slide-in-from-bottom-full data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom-full md:slide-in-from-top-full md:data-[state=closed]:slide-out-to-top-full'
+            'will-change-transform animate-in slide-in-from-bottom-full data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom-full md:slide-in-from-top-full md:data-[state=closed]:slide-out-to-top-full'
           )}
         >
           {children}
