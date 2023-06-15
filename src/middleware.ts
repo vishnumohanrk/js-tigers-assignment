@@ -36,5 +36,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: '/((?!.*\\..*|_next).*)',
+  matcher: ['/', '/new', '/vendor/:id*', '/login'],
 };
