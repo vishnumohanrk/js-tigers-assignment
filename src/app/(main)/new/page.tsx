@@ -2,6 +2,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { Section } from '@/components/shared/section';
+import { CountryList } from '@/components/vendor/country-list';
 import { VendorForm } from '@/components/vendor/form';
 import { db } from '@/lib/db';
 import { getAuthUserId } from '@/lib/session';
@@ -28,7 +29,13 @@ async function createVendor(formData: FormData) {
 export default function NewVendorPage() {
   return (
     <Section heading="Create New Vendor">
-      <VendorForm type="create" action={createVendor} />
+      <VendorForm
+        type="create"
+        action={createVendor}
+        countryList={<CountryList />}
+      />
     </Section>
   );
 }
+
+export const fetchCache = 'default-cache';

@@ -2,6 +2,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { Section } from '@/components/shared/section';
+import { CountryList } from '@/components/vendor/country-list';
 import { VendorForm } from '@/components/vendor/form';
 import { db } from '@/lib/db';
 import { validateForm, validateOwner } from '@/lib/utils';
@@ -32,7 +33,14 @@ export default async function EditVendorPage({ params }: VendorPageProps) {
 
   return (
     <Section heading="Edit Vendor Details">
-      <VendorForm type="update" action={updateVendor} vendor={vendor} />
+      <VendorForm
+        type="update"
+        vendor={vendor}
+        action={updateVendor}
+        countryList={<CountryList />}
+      />
     </Section>
   );
 }
+
+export const fetchCache = 'default-cache';
